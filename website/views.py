@@ -3,6 +3,7 @@ from flask import Blueprint, flash, jsonify, redirect, render_template, request,
 from flask_login import login_required, current_user
 from .models import Note
 from . import db
+from .forms import MyForm
 
 views = Blueprint('views', __name__)
 
@@ -31,3 +32,17 @@ def delete_note():
             flash('Note Deleted', category="success")
 
     return redirect(url_for('views.home'))
+@views.route('/create-event', methods=['GET', 'POST'])
+def create_event():
+    if request.method == 'POST':
+        pass
+        #implement event creation
+    return render_template("create_event.html", user=current_user)
+@views.route('/application', methods=['GET', 'POST'])
+def application():
+    form = MyForm()
+
+    if request.method == 'POST':
+        pass
+        #implement application form
+    return render_template("application.html", user=current_user, form=form)
