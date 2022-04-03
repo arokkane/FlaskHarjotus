@@ -1,9 +1,10 @@
+from importlib.metadata import requires
 import json
 from flask import Blueprint, flash, jsonify, redirect, render_template, request, url_for
 from flask_login import login_required, current_user
 from .models import Note
 from . import db
-from .forms import MyForm
+from .forms import MyForm, EventCreationFrom
 
 views = Blueprint('views', __name__)
 
@@ -34,10 +35,11 @@ def delete_note():
     return redirect(url_for('views.home'))
 @views.route('/create-event', methods=['GET', 'POST'])
 def create_event():
+    form = EventCreationFrom(request.form)
     if request.method == 'POST':
         pass
         #implement event creation
-    return render_template("create_event.html", user=current_user)
+    return render_template("create_event.html", user=current_user, form=form)
 @views.route('/application', methods=['GET', 'POST'])
 def application():
     form = MyForm()
