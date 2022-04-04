@@ -4,14 +4,21 @@
 {% endblock title %}
 {% block content %}
 <form method="POST">
+    <BR/>
     <h3 align="center">Create Event</h3>
-    {{ form.name.label }}
-    <BR>
-    {{ form.game}}
-    <BR>
-    {{form.application_period}}
-    <p>
-        <input type="submit" value="Add">
-    </p>
+    {{ form.hidden_tag()}}
+    {{ form.name.label(class="form-label") }}
+    {{ form.name(class="form-control")}}
+    <BR/>
+    {{ form.game.label(class="form-label")}}
+    {{ form.game(class="form-control") }}
+    <BR/>
+    {{form.application_period.label(class="form-label")}}
+    {{form.application_period(class="form-control")}}
+    <BR/>
+    {{form.event_time.label(class="form-label")}}
+    {{form.event_time(class="form-control")}}
+    <BR/>
+    {{form.submit(class="btn btn-secondary")}}
 </form>
 {% endblock content %}

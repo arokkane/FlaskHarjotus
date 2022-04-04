@@ -1,8 +1,8 @@
 {%extends "base.html"%}
 {% block title %}Home{% endblock %}
 {%block content%}
-<h1 align="center">Notes</h1>
-<ul class="list-group list-group-flush" id="notes">
+<h1 align="center">Events</h1>
+<!---<ul class="list-group list-group-flush" id="notes">
     {% for note in user.notes %}
       <li class="list-group-item"> {{ note.data }}
             <form action="{{url_for('views.delete_note')}}" method="POST">
@@ -13,13 +13,25 @@
             </form>
       </li>
     {% endfor %}
+</ul>--->
+<ul class="list-group list-group-flush" id="events">
+    {% for event in events %}
+      <li class="list-group-item"> {{ event[0].name}} {{ event[1] }} {{ event[0].application_period }} {{event[2]}}
+        {% if event[0].user_id == user.id %}
+            <a href="{{url_for('views.manage_event')}}?id={{event[0].id}}" class="btn btn-secondary">Manage</a>
+        {% endif %}
+        {% if event[2] %}
+            <a href="{{url_for('views.application')}}?id={{event[0].id}}" class="btn btn-secondary">Apply</a>
+        {% endif %}
+      </li>
+    {% endfor %}
 </ul>
-    <form method="POST">
+    <!-- <form method="POST">
         <textarea name="note" id="note" class="form-control"></textarea>
         <br />
         <div align="center">
             <button type="submit" class="btn btn-primary">Add Note</button>
         </div>
-    </form>
+    </form> -->
 
 {%endblock%}
