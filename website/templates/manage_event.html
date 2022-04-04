@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}
+    Manage Event
+{% endblock title %}
+{% block content %}
+<form method="POST">
+    <h3 align="center">{{ event.name }}</h3>
+    <ul class="list-group list-group-flush" id="applications"></ul>
+    {% for application in event.applications %}
+    <li class="list-group-item"> {{ application.name}} {{ event[0].application_period }} {{event[2]}}
+    {% endfor %}
+</form>
+{% endblock content %}
