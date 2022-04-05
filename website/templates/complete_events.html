@@ -6,7 +6,9 @@
 <ul class="list-group" id="events">
     {% for event in events %}
         {% if event.complete %}
-        <li class="list-group-item"> {{ event.name}} {{ event.event_date }}
+        <li class="list-group-item"> 
+            <a href="{{url_for('event.view_event')}}?id={{event.id}}" class="btn btn-secondary">{{ event.name}} </a>
+            {{ event.event_date }}
         </li>
         {% endif %}
     {% endfor %}

@@ -13,7 +13,7 @@
         {{characters[match.player1_char].name}} {{match.player1.name}} {{match.score1}} vs {{match.score2}} {{match.player2.name}}  {{characters[match.player2_char].name}}
         <br>
     {% endfor %}
-    {% if event.user_id == user.id %}
+    {% if event.user_id == user.id and event.complete == false%}
         <form method="POST">
             <BR/>
             <h3 align="center">Add new match</h3>
@@ -41,8 +41,9 @@
                 </div>
             </div>
         </form>
+        <br>
         <form action="/close-event?id={{event.id}}" method="POST">
-            <input type="submit" name="close" value="close" />
+            <input type="submit" name="close" value="Close Event" class="btn btn-danger"/>
         </form>
     {% endif %}
 {% endblock content %}

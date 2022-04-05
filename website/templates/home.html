@@ -9,7 +9,7 @@
         
       <li class="list-group-item"> 
         <a href="{{url_for('event.view_event')}}?id={{event[0].id}}" class="btn btn-secondary">{{ event[0].name}} </a>
-        {{ event[1] }} {{ event[0].application_period }} {{event[2]}}
+        {{ event[1] }} Applications open until: {{ event[0].application_period }}
         {% if event[0].user_id == user.id %}
             <a href="{{url_for('event.manage_event')}}?id={{event[0].id}}" class="btn btn-success">Manage</a>
         {% endif %}
