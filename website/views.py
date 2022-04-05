@@ -52,6 +52,7 @@ def guilty_gear():
             if match.player1_char == character.id or match.player2_char == character.id:
                 games += 1
         data.append((character, games)) 
+    Sort_Tuple(data)
     return render_template("guilty_gear.html", user=current_user, data=data)
 
 @views.route("/blazblue", methods=['GET'])
@@ -65,6 +66,7 @@ def blazblue():
             if match.player1_char == character.id or match.player2_char == character.id:
                 games += 1
         data.append((character, games)) 
+    Sort_Tuple(data)
     return render_template("blazblue.html", user=current_user, data=data)
 
 @views.route("/players", methods=['GET'])
@@ -78,4 +80,13 @@ def players():
             if match.player1id == player.id or match.player2id == player.id:
                 games += 1
         data.append((player, games)) 
+    Sort_Tuple(data)
     return render_template("players.html", user=current_user, data=data)
+
+def Sort_Tuple(tup): 
+  
+    # reverse = None (Sorts in Ascending order) 
+    # key is set to sort using second element of 
+    # sublist lambda has been used 
+    tup.sort(key = lambda x: x[1], reverse=True) 
+    return tup 
