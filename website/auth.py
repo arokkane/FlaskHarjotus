@@ -1,4 +1,3 @@
-import email
 from flask import Blueprint, redirect, render_template, request, flash, url_for
 from .models.models import User
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -53,5 +52,4 @@ def sign_up():
             db.session.commit()
             login_user(new_user, remember=True)
             flash('Account created', category='success')
-
     return render_template("sign_up.html", user=current_user)

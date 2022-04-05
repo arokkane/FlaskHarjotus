@@ -9,22 +9,24 @@ from flask import Flask, render_template, redirect, url_for
 db = SQLAlchemy()
 DB_NAME = "database.db"
 
-
-
-
 def create_app():
     app = Flask(__name__)
-    app.config.from_object('website.config.Config')
+    app.config.from_object('website.config.DevelopmentConfig')
     db.init_app(app)
+    
 
     with app.app_context():
         from .views import views
         from .auth import auth
+        from .event import event
         app.register_blueprint(views, url_prefix='/')
         app.register_blueprint(auth, url_prefix='/')
+        app.register_blueprint(event, url_prefix='/')
 
-        from .models.models import User, Note, Event, Game, Character
-        create_database(app)
+        from .models.models import User, Event, Game, Character
+        #create_database(app)
+        db.create_all(app=app)
+        print('Created Database')
 
         login_manager = LoginManager()
         login_manager.login_view = 'auth.login'

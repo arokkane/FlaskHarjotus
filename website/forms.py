@@ -1,11 +1,9 @@
+from secrets import choice
 from flask import request
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, DateTimeField, SelectField, DateTimeLocalField, TextAreaField
+from wtforms import StringField, SubmitField, DateTimeField, SelectField, DateTimeLocalField, TextAreaField, IntegerField, FormField, FieldList
 from wtforms.validators import DataRequired, InputRequired, Length
 GAME_CHOICES = [('1', 'Guilty Gear Strive'),('2', 'BlazBlue Centralfiction'), ('3', 'Street Fighter V')]
-
-class MyForm(FlaskForm):
-    name = StringField('name', validators=[DataRequired()])
 
 class EventCreationForm(FlaskForm):
     name = StringField(label='Event Name', validators=[InputRequired(), Length(min=1, max=200)])
@@ -19,3 +17,16 @@ class ApplicationForm(FlaskForm):
     character = SelectField('Character', choices=[])
     notes = TextAreaField('Additional notes')
     submit = SubmitField(label='Submit')
+
+class Modifyform(EventCreationForm):
+    close_applications = SubmitField(label='Close applications')
+
+class AddMatch(FlaskForm):
+    player1 = SelectField(label='Player 1', choices=[])
+    score1 = IntegerField(label='Score 1')
+    player2 = SelectField(label='Player 2', choices=[])
+    score2 = IntegerField(label='Score 2')
+    submit = SubmitField(label='Add Match')
+
+class MatchesForm(FlaskForm):
+    matches = FieldList(FormField(AddMatch), min_entries=1)

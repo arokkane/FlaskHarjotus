@@ -1,13 +1,13 @@
 from unicodedata import name
 from website import db
 from website import create_app
-from website.models.models import User, Note, Event, Game, Character
+from website.models.models import User, Event, Game, Character
 
 def populatedb():
     app = create_app()
     with app.app_context():
         if Game.query.first() == None:
-            GGST = Game(name='Guilty Gear Strive')
+            GGST = Game(name='Guilty Gear Strive', icon='GGST/ggst.png')
             db.session.add(GGST)
             BBCF = Game(name='Blazblue Centralfiction')
             db.session.add(BBCF)

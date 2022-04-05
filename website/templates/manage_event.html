@@ -3,11 +3,47 @@
     Manage Event
 {% endblock title %}
 {% block content %}
-<form method="POST">
+{% if event.application_open %}
+    <form method="POST">
+        <BR/>
+        <h3 align="center">Modify Event</h3>
+        {{ form.hidden_tag()}}
+        {{ form.name.label(class="form-label") }}
+        {{ form.name(class="form-control")}}
+        <BR/>
+        {{ form.game.label(class="form-label")}}
+        {{ form.game(class="form-control") }}
+        <BR/>
+        {{form.application_period.label(class="form-label")}}
+        {{form.application_period(class="form-control")}}
+        <BR/>
+        {{form.event_time.label(class="form-label")}}
+        {{form.event_time(class="form-control")}}
+        <BR/>
+        {{form.submit(class="btn btn-secondary")}}
+        {{form.close_applications(class="btn btn-success")}}
+    </form>
+{% endif %}
     <h3 align="center">{{ event.name }}</h3>
     <ul class="list-group list-group-flush" id="applications"></ul>
     {% for application in event.applications %}
-    <li class="list-group-item"> {{ application.name}} {{ event[0].application_period }} {{event[2]}}
+    <li class="list-group-item" > 
+        <button type="button" class="application btn btn-link" data-id="{{application.id}}">{{ application.name}}</button>
+    </li>
     {% endfor %}
-</form>
+    <div class="modal fade" id="applyModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">User Info</h4>
+                    <button type="button" class="close" data-dismiss="modal">x</button>
+                </div>
+                <div class="modal-body">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock content %}

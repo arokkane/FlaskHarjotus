@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block title %}
+    {{event.name}}
+{% endblock title %}
+{% block content %}
+    <h1 align="center">{{event.name}}</h1>
+    <p>
+        {% if event.notes != None %}
+            {{event.notes}}
+        {% endif %}
+    </p>
+    {% for match in event.matches %}
+        {{characters[match.player1_char].name}} {{match.player1.name}} {{match.score1}} vs {{match.score2}} {{match.player2.name}}  {{characters[match.player2_char].name}}
+        <br>
+    {% endfor %}
+    {% if event.user_id == user.id %}
+        <form method="POST">
+            <BR/>
+            <h3 align="center">Add new match</h3>
+            {{ form.hidden_tag()}}
+            <div class="row">
+                <div class="col">
+                    {{ form.score1.label(class="form-label")}}
+                    {{ form.score1(class="form-control") }}
+                </div>
+                <div class="col">
+                    {{ form.player1.label(class="form-label") }}
+                    {{ form.player1(class="form-control")}}
+                </div>        
+                    
+                <div class="col">
+                    {{ form.score2.label(class="form-label")}}
+                    {{ form.score2(class="form-control") }}
+                </div>
+                <div class="col">
+                    {{ form.player2.label(class="form-label") }}
+                    {{ form.player2(class="form-control")}}
+                </div>
+                <div class="col align-self-end">
+                    {{form.submit(class="btn btn-secondary")}}
+                </div>
+            </div>
+        </form>
+    {% endif %}
+{% endblock content %}

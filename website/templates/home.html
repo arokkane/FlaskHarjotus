@@ -2,36 +2,20 @@
 {% block title %}Home{% endblock %}
 {%block content%}
 <h1 align="center">Events</h1>
-<!---<ul class="list-group list-group-flush" id="notes">
-    {% for note in user.notes %}
-      <li class="list-group-item"> {{ note.data }}
-            <form action="{{url_for('views.delete_note')}}" method="POST">
-                <input type="hidden" name="id" value="{{note.id}}"></input>
-                    <button type="submit" class="close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-            </form>
-      </li>
-    {% endfor %}
-</ul>--->
-<ul class="list-group list-group-flush" id="events">
+
+<ul class="list-group" id="events">
     {% for event in events %}
-      <li class="list-group-item"> {{ event[0].name}} {{ event[1] }} {{ event[0].application_period }} {{event[2]}}
+      <li class="list-group-item"> 
+        <a href="{{url_for('event.view_event')}}?id={{event[0].id}}" class="btn btn-secondary">{{ event[0].name}} </a>
+        {{ event[1] }} {{ event[0].application_period }} {{event[2]}}
         {% if event[0].user_id == user.id %}
-            <a href="{{url_for('views.manage_event')}}?id={{event[0].id}}" class="btn btn-secondary">Manage</a>
+            <a href="{{url_for('event.manage_event')}}?id={{event[0].id}}" class="btn btn-success">Manage</a>
         {% endif %}
-        {% if event[2] %}
-            <a href="{{url_for('views.application')}}?id={{event[0].id}}" class="btn btn-secondary">Apply</a>
+        {% if event[2] and event[0].application_open %}
+            <a href="{{url_for('event.application')}}?id={{event[0].id}}" class="btn btn-success">Apply</a>
         {% endif %}
       </li>
     {% endfor %}
 </ul>
-    <!-- <form method="POST">
-        <textarea name="note" id="note" class="form-control"></textarea>
-        <br />
-        <div align="center">
-            <button type="submit" class="btn btn-primary">Add Note</button>
-        </div>
-    </form> -->
 
 {%endblock%}
