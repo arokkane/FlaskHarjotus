@@ -40,3 +40,29 @@ def matches():
         characterlist[character.id] = character
 
     return render_template("matches.html", user=current_user, matches=matches, characters=characterlist)
+
+@views.route("/guilty-gear", methods=['GET'])
+def guilty_gear():
+    characters = Character.query.filter_by(game=1).all()
+    data = []
+    for character in characters:
+        matches = Match.query.all()
+        games = 0
+        for match in matches:
+            if match.player1_char == character.id or match.player2_char == character.id:
+                games += 1
+        data.append((character, games)) 
+    return render_template("guilty_gear.html", user=current_user, data=data)
+
+@views.route("/blazblue", methods=['GET'])
+def blazblue():
+    characters = Character.query.filter_by(game=2).all()
+    data = []
+    for character in characters:
+        matches = Match.query.all()
+        games = 0
+        for match in matches:
+            if match.player1_char == character.id or match.player2_char == character.id:
+                games += 1
+        data.append((character, games)) 
+    return render_template("blazblue.html", user=current_user, data=data)

@@ -1,0 +1,14 @@
+{%extends "base.html"%}
+{% block title %}Guilty Gear stats{% endblock %}
+{%block content%}
+<BR/>
+<h1 align="center">Stats</h1>
+
+<ul class="list-group" id="characters">
+    {% for character in data %}
+    {{character[0].name}} {{character[1]}}
+    <br>
+    {% endfor %}
+</ul>
+
+{%endblock%}
