@@ -1,7 +1,7 @@
 from datetime import datetime
 from flask import Blueprint, flash, jsonify, redirect, render_template, request, url_for
 from flask_login import login_required, current_user
-from .models.models import Character, Game, EventApplication, Player, Event
+from .models.models import Character, Match, EventApplication, Player, Event
 from . import db
 from .forms import ApplicationForm, Modifyform,  EventCreationForm
 
@@ -30,3 +30,13 @@ def applicantdata():
         applicationdata = EventApplication.query.get(userid)
         
     return jsonify({'htmlresponse': render_template('applymodal.html',applications=applicationdata)})   
+
+@views.route("/matches", methods=['GET'])
+def matches():
+    matches = Match.query.all()
+    characters = Character.query.all()
+    characterlist = [0] * 1000
+    for character in characters:
+        characterlist[character.id] = character
+
+    return render_template("matches.html", user=current_user, matches=matches, characters=characterlist)

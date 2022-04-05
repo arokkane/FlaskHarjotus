@@ -1,0 +1,13 @@
+{%extends "base.html"%}
+{% block title %}Matches{% endblock %}
+{%block content%}
+<h1 align="center">Matches</h1>
+
+<ul class="list-group" id="matches">
+    {% for match in matches %}
+    {{characters[match.player1_char].name}} {{match.player1.name}} {{match.score1}} vs {{match.score2}} {{match.player2.name}}  {{characters[match.player2_char].name}}
+    <br>
+    {% endfor %}
+</ul>
+
+{%endblock%}

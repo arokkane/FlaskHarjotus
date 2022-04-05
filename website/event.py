@@ -133,3 +133,16 @@ def view_event():
         event=event, 
         form=form,
         characters=characterlist)
+
+@event.route('/complete-events', methods=['GET','POST'])
+def complete_events():
+    events = Event.query.all()
+    return render_template("complete_events.html", events=events, user=current_user)
+
+@event.route('/close-event', methods=['GET','POST'])
+def close_event():
+    eventid = int(request.args.get('id'))
+    event = Event.query.get(eventid)
+    event.complete = True
+    db.session.commit()
+    return redirect(url_for('event.view_event')+"?id="+str(eventid))
