@@ -4,11 +4,20 @@
 <BR/>
 <h1 align="center">Stats</h1>
 
-<ul class="list-group" id="characters">
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Character</th>
+        <th scope="col">Games Played</th>
+      </tr>
+    </thead>
+    <tbody>
     {% for character in data %}
-    {{character[0].name}} {{character[1]}}
-    <br>
+    <tr>
+    <th scope="row">{{character[0].name}}</th> 
+    <td>{{character[1]}}</td>
+    </tr>
     {% endfor %}
-</ul>
-
+    </tbody>
+</table>
 {%endblock%}

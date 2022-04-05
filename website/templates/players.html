@@ -1,23 +1,23 @@
 {%extends "base.html"%}
-{% block title %}Guilty Gear stats{% endblock %}
+{% block title %}Players{% endblock %}
 {%block content%}
 <BR/>
-<h1 align="center">Stats</h1>
+<h1 align="center">Players</h1>
+
 <table class="table">
     <thead>
       <tr>
-        <th scope="col">Character</th>
+        <th scope="col">Player</th>
         <th scope="col">Games Played</th>
       </tr>
     </thead>
     <tbody>
-    {% for character in data %}
+    {% for player in data %}
     <tr>
-    <th scope="row">{{character[0].name}}</th> 
-    <td>{{character[1]}}</td>
+    <th scope="row">{{player[0].name}}</th> 
+    <td>{{player[1]}}</td>
     </tr>
     {% endfor %}
     </tbody>
 </table>
-
 {%endblock%}

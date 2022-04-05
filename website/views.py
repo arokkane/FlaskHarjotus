@@ -66,3 +66,16 @@ def blazblue():
                 games += 1
         data.append((character, games)) 
     return render_template("blazblue.html", user=current_user, data=data)
+
+@views.route("/players", methods=['GET'])
+def players():
+    players = Player.query.all()
+    data = []
+    for player in players:
+        matches = Match.query.all()
+        games = 0
+        for match in matches:
+            if match.player1id == player.id or match.player2id == player.id:
+                games += 1
+        data.append((player, games)) 
+    return render_template("players.html", user=current_user, data=data)
