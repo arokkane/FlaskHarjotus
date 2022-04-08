@@ -6,7 +6,6 @@ class Config(object):
     CSRF_ENABLED = True
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL")
-    #SQLALCHEMY_DATABASE_URI = 'postgresql://gwsqrcgk:ErDiJiKEHXR1Bc_PnXglo6nl3J3W44BA@hattie.db.elephantsql.com/gwsqrcgk'
 class ProductionConfig(Config):
     DEBUG = False
     SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL_POSTGRES")
